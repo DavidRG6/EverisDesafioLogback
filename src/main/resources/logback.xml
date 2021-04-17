@@ -1,0 +1,40 @@
+<configuration>
+
+	<timestamp key="logDate" datePattern="dd-MM-yyyy" />
+	<!-- Appender -->
+
+	<appender name="AppenderDesafioLogback"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+		<!-- Nombre del Fichero -->
+
+		<file>C://dev//logs//elb1DRG_(-${logDate}).log</file>
+
+		<!-- Politica del Fichero -->
+
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>C://dev//logs//elb1DRG_(${logDate})_%i.log.zip
+			</fileNamePattern>
+			<minIndex>1</minIndex>
+			<maxIndex>4</maxIndex>
+		</rollingPolicy>
+
+		<!--Cuando debe saltar la politica -->
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>90KB</maxFileSize>
+		</triggeringPolicy>
+
+		<!-- Traza del Logger -->
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} : %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<!-- LOGGER ROOT -->
+	<root level="trace">
+		<appender-ref ref="AppenderDesafioLogback" />
+	</root>
+</configuration>
